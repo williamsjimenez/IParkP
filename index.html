@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política Pública de Participación Ciudadana - Barrio Parque Industrial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #77dd77;
+            overflow-x: hidden;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .slide:not(:last-child) {
+            border-bottom: 3px solid rgba(255,255,255,0.2);
+        }
+
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            border: 2px solid #ff6961;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .slide-container {
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 80px;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.9);
+            color: #ff6961;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Slide de Introducción */
+        .intro-slide {
+            background: #84b6f4;
+            color: white;
+            text-align: center;
+        }
+
+        .intro-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .intro-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .intro-highlight {
+            font-size: 2.2rem;
+            background: rgba(255,255,255,0.95);
+            color: #ff6961;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border: 3px solid #fdfd96;
+            font-weight: bold;
+        }
+
+        /* Slides de Contenido */
+        .content-slide {
+            background: #fdcae1;
+            color: #ff6961;
+        }
+
+        .title {
+            text-align: center;
+            color: #ff6961;
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #77dd77;
+            border-radius: 2px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border: 2px solid #84b6f4;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(255, 105, 97, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #77dd77;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 105, 97, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            background: #84b6f4;
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #ff6961;
+        }
+
+        .card-content {
+            color: #4a5568;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-content li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 105, 97, 0.1);
+        }
+
+        .card-content li:last-child {
+            border-bottom: none;
+        }
+
+        .highlight-box {
+            background: #fdfd96;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: #ff6961;
+            margin-top: 2rem;
+        }
+
+        .highlight-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .highlight-box p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+
+        /* QR y Enlaces */
+        .qr-card {
+            background: #ff6961;
+            color: white;
+            text-align: center;
+        }
+
+        .qr-image {
+            width: 180px;
+            height: 180px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: 4px solid #fdfd96;
+            margin: 1rem auto;
+            display: block;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Slide Final */
+        .final-slide {
+            background: #77dd77;
+            color: white;
+            text-align: center;
+        }
+
+        .final-logo {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .final-logo img {
+            height: 100px;
+            width: auto;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #ff6961;
+        }
+
+        .final-title {
+            font-size: 3rem;
+            color: #fdfd96;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .final-text {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .final-highlight {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem auto;
+            max-width: 600px;
+            border: 2px solid rgba(253, 253, 150, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .intro-title {
+                font-size: 2.5rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .intro-highlight {
+                font-size: 1.5rem;
+                padding: 20px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Introducción -->
+    <div class="slide intro-slide">
+        <div class="header">
+            <img src="./logo_alcaldia_pereira.png" alt="Alcaldía de Pereira" class="logo">
+            <img src="./logo_pereira_participa.png" alt="Pereira Participa" class="logo">
+        </div>
+        <div class="slide-container">
+            <h1 class="intro-title">BARRIO PARQUE INDUSTRIAL</h1>
+            <p class="intro-subtitle">Líderes comunitarios constructores de ciudad</p>
+            <div class="intro-highlight">
+                🏘️ Construyamos juntos la Política Pública de Participación Ciudadana de Pereira 🏘️
+            </div>
+        </div>
+        <div class="slide-number">Inicio</div>
+    </div>
+
+    <!-- Slide 2: Su Participación -->
+    <div class="slide content-slide">
+        <div class="header">
+            <img src="logo_alcaldia_pereira.png" alt="Alcaldía de Pereira" class="logo" onerror="this.style.display='none'">
+            <img src="logo_pereira_participa.png" alt="Pereira Participa" class="logo" onerror="this.style.display='none'">
+        </div>
+        <div class="slide-container">
+            <h1 class="title">USTEDES YA PRACTICAN LA PARTICIPACIÓN CIUDADANA</h1>
+            
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon">🏘️</div>
+                        <h2 class="card-title">Su Experiencia en el Barrio</h2>
+                    </div>
+                    <div class="card-content" style="color: rgba(255,255,255,0.9);">
+                        <p style="margin-bottom: 1rem; font-weight: 600;">Como vecinos del Parque Industrial, ustedes ya ejercen participación:</p>
+                        <ul>
+                            <li style="color: black;">🏗️ <strong>Gestionan mejoras</strong> para su barrio</li>
+                            <li style="color: black;">👥 <strong>Se organizan</strong> para solucionar problemas</li>
+                            <li style="color: black;">🔍 <strong>Hacen seguimiento</strong> a las obras públicas</li>
+                            <li style="color: black;">💡 <strong>Proponen soluciones</strong> comunitarias</li>
+                            <li style="color: black;">🤝 <strong>Colaboran</strong> con otros barrios</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card" style="background: #84b6f4; color: white;">
+                    <div class="card-header">
+                        <div class="icon" style="background: #ff6961;">🎯</div>
+                        <h2 class="card-title" style="color: white;">Lo que Necesita su Barrio</h2>
+                    </div>
+                    <div class="card-content">
+                        <p style="margin-bottom: 1rem; font-weight: 600;">Una <strong>política pública</strong> que garantice:</p>
+                        <ul>
+                            <li>🚀 <strong>Espacios formales</strong> para participar</li>
+                            <li>📋 <strong>Canales directos</strong> con la Alcaldía</li>
+                            <li>⚡ <strong>Respuestas rápidas</strong> a sus propuestas</li>
+                            <li>🏛️ <strong>Voz real</strong> en las decisiones de la ciudad</li>
+                            <li>💰 <strong>Presupuesto</strong> para proyectos comunitarios</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>🔑 OPORTUNIDAD PARA EL BARRIO</h3>
+                <p>Esta política va a <strong>institucionalizar</strong> la participación del Parque Industrial.<br>
+                Sus propuestas tendrán <strong>canales oficiales</strong> y respuestas garantizadas.</p>
+            </div>
+        </div>
+        <div class="slide-number">1 / 3</div>
+    </div>
+
+    <!-- Slide 3: Qué es una Política Pública -->
+    <div class="slide content-slide">
+        <div class="header">
+            <img src="logo_alcaldia_pereira.png" alt="Alcaldía de Pereira" class="logo" onerror="this.style.display='none'">
+            <img src="logo_pereira_participa.png" alt="Pereira Participa" class="logo" onerror="this.style.display='none'">
+        </div>
+        <div class="slide-container">
+            <h1 class="title">¿QUÉ ES UNA POLÍTICA PÚBLICA?</h1>
+            
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 2rem; color: #ff6961; margin-bottom: 1rem;">LA METÁFORA DEL BARRIO</h2>
+                <p style="font-size: 1.2rem; color: #666; font-style: italic;">Su barrio tiene organización... La ciudad también necesita organización</p>
+            </div>
+
+            <div class="cards-container">
+                <div class="card" style="background: #77dd77; color: white;">
+                    <div class="card-header">
+                        <div class="icon" style="background: #ff6961;">🏘️</div>
+                        <h2 class="card-title" style="color: white;">SU BARRIO TIENE:</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>📋 <strong>Junta de Acción Comunal</strong> (líderes elegidos)</li>
+                            <li>🎉 <strong>Actividades</strong> (bazares, reuniones, mingas)</li>
+                            <li>💰 <strong>Recursos</strong> (cuotas, aportes, subsidios)</li>
+                            <li>🏢 <strong>Espacios</strong> (salón comunal, parques, canchas)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="background: #fdcae1;">
+                    <div class="card-header">
+                        <div class="icon" style="background: #77dd77;">🏛️</div>
+                        <h2 class="card-title">LA POLÍTICA PÚBLICA SERÁ:</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>📋 <strong>Reglas oficiales</strong> para la participación en Pereira</li>
+                            <li>🎉 <strong>Programas ciudadanos</strong> en toda la ciudad</li>
+                            <li>💰 <strong>Presupuesto municipal</strong> garantizado</li>
+                            <li>🏢 <strong>Espacios permanentes</strong> para participar</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>💡 BENEFICIO DIRECTO</h3>
+                <p>Así como su barrio está organizado,<br>
+                <strong>toda Pereira estará organizada para escuchar</strong><br>
+                y responder a las propuestas de cada barrio.</p>
+            </div>
+        </div>
+        <div class="slide-number">2 / 3</div>
+    </div>
+
+    <!-- Slide 4: Participación + QR -->
+    <div class="slide content-slide">
+        <div class="header">
+            <img src="logo_alcaldia_pereira.png" alt="Alcaldía de Pereira" class="logo" onerror="this.style.display='none'">
+            <img src="logo_pereira_participa.png" alt="Pereira Participa" class="logo" onerror="this.style.display='none'">
+        </div>
+        <div class="slide-container">
+            <h1 class="title">SU EXPERIENCIA ES FUNDAMENTAL</h1>
+            
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 2rem; color: #ff6961; margin-bottom: 1rem;">
+                    Su conocimiento del barrio es <strong style="color: #fdfd96;">INVALUABLE</strong>
+                </h2>
+                <p style="font-size: 1.2rem; color: #666;">Ustedes saben qué funciona, qué no funciona, y qué necesita su comunidad</p>
+            </div>
+
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon">🎯</div>
+                        <h2 class="card-title">Lo que Ustedes Conocen</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>✅ <strong>Qué funciona</strong> en participación comunitaria</li>
+                            <li>❌ <strong>Qué no funciona</strong> y debe mejorarse</li>
+                            <li>🚧 <strong>Barreras reales</strong> que enfrentan en el barrio</li>
+                            <li>💡 <strong>Ideas</strong> para mejorar la participación</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card qr-card">
+                    <div class="card-header">
+                        <div class="icon" style="background: rgba(255,255,255,0.2);">📱</div>
+                        <h2 class="card-title" style="color: white;">¡Participen en la Encuesta!</h2>
+                    </div>
+                    <div class="card-content" style="color: white; text-align: center;">
+                        <p style="font-size: 1.2rem; margin-bottom: 1rem; color: white; font-weight: bold;">
+                            📋 Formulario para Líderes Comunitarios
+                        </p>
+                        <a href="https://es.surveymonkey.com/r/PPPC1largo" target="_blank">
+                            <img src="./PPPC_lar.png" alt="Código QR" class="qr-image">
+                        </a>
+                        <p style="margin: 1rem 0; color: rgba(255,255,255,0.9);">
+                            <strong>URL directa:</strong><br>
+                            <a href="https://es.surveymonkey.com/r/PPPC1largo" target="_blank" style="color: #ffd700;">
+                                es.surveymonkey.com/r/PPPC1largo
+                            </a>
+                        </p>
+                        <p style="color: white;">
+                            <strong>⏱️ 10 preguntas - 8 minutos</strong><br>
+                            <span style="font-size: 0.9rem; opacity: 0.8;">Sus respuestas van directo a los técnicos que diseñan la política</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>🌟 USTEDES SON PROTAGONISTAS</h3>
+                <p>Sus respuestas se suman a las de otros <strong>500 líderes</strong><br>
+                de diferentes barrios y sectores de Pereira</p>
+            </div>
+        </div>
+        <div class="slide-number">3 / 4</div>
+    </div>
+
+    <!-- Slide 5: Agradecimiento -->
+    <div class="slide final-slide">
+        <div class="slide-container">
+            <div class="final-logo">
+                <img src="./logo_pereira_participa.png" alt="Pereira Participa">
+            </div>
+            
+            <h1 class="final-title">¡GRACIAS PARQUE INDUSTRIAL!</h1>
+            
+            <p class="final-text">
+                Por ser <strong style="color: #fdfd96;">constructores de comunidad</strong> en nuestro barrio
+            </p>
+            
+            <p class="final-text">
+                Su experiencia comunitaria, su liderazgo vecinal y su compromiso con el barrio 
+                son <strong style="color: #fdfd96;">fundamentales</strong> para construir 
+                una Pereira más participativa e inclusiva.
+            </p>
+            
+            <div class="final-highlight">
+                <p style="font-size: 1.4rem; font-weight: bold; margin-bottom: 0.5rem;">
+                    🏘️ Construimos ciudad desde los barrios
+                </p>
+                <p style="font-size: 1.1rem;">
+                    Cada barrio cuenta, cada vecino importa, cada voz es esencial
+                </p>
+            </div>
+            
+            <div style="margin-top: 3rem;">
+                <p style="font-size: 1.1rem; opacity: 0.8;">
+                    <strong>Alcaldía de Pereira</strong> • <strong style="color: #fdfd96;">Pereira Participa</strong>
+                </p>
+                <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 0.5rem;">
+                    Construyendo juntos la Política Pública de Participación Ciudadana
+                </p>
+            </div>
+        </div>
+        <div class="slide-number">4 / 4</div>
+    </div>
+</body>
+</html>
